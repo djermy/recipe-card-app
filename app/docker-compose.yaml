@@ -1,19 +1,19 @@
-version: "3.1"
-
 services:
-  RC-postgres:
+  RC-psql:
+    container_name: "RC-psql"
     image: bitnami/postgresql:14
-    container_name: RC-postgres
-    restart: always
-    network_mode: host
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+    network_mode: "host"
     environment:
-      POSTGRESQL_USER: postgres
-      POSTGRESQL_DATABASE: RC
-      POSTGRESQL_PASSWORD: password
-      ALLOW_EMPTY_PASSWORD: yes
+      POSTGRES_DB: "RC"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "password"
       ALLOW_IP: 0.0.0.0/0
     volumes:
-      - RC_postgres:/bitnami/postgresql
+      - RC_psql:/bitnami/postgresql
 
   RC-pgadmin:
     container_name: 'RC-pgadmin'
@@ -21,7 +21,7 @@ services:
     ports:
       - 5555:80
     depends_on:
-      - RC-postgres
+      - RC-psql
     network_mode: host
     environment:
       PGADMIN_DEFAULT_EMAIL: 'postgres@shadow.com'
@@ -31,5 +31,5 @@ services:
       - RC_pgadmin:/var/lib/pgadmin
 
 volumes:
-  RC_postgres:
+  RC_psql:
   RC_pgadmin:
