@@ -1,0 +1,35 @@
+version: "3.1"
+
+services:
+  RC-postgres:
+    image: bitnami/postgresql:14
+    container_name: RC-postgres
+    restart: always
+    network_mode: host
+    environment:
+      POSTGRESQL_USER: postgres
+      POSTGRESQL_DATABASE: RC
+      POSTGRESQL_PASSWORD: password
+      ALLOW_EMPTY_PASSWORD: yes
+      ALLOW_IP: 0.0.0.0/0
+    volumes:
+      - RC_postgres:/bitnami/postgresql
+
+  RC-pgadmin:
+    container_name: 'RC-pgadmin'
+    image: dpage/pgadmin4
+    ports:
+      - 5555:80
+    depends_on:
+      - RC-postgres
+    network_mode: host
+    environment:
+      PGADMIN_DEFAULT_EMAIL: 'postgres@shadow.com'
+      PGADMIN_DEFAULT_PASSWORD: 'password'
+      PGADMIN_CONFIG_LOGIN_BANNER: '"Email: postgres@shadow.com Pass: password"'
+    volumes:
+      - RC_pgadmin:/var/lib/pgadmin
+
+volumes:
+  RC_postgres:
+  RC_pgadmin:
