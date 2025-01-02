@@ -1,27 +1,13 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
+from fastapi import Depends, FastAPI
+from .dependencies import get_query_token, get_token_header
+from .api.endpoints import recipe
 
-app = FastAPI()
+app = FastAPI(
+    dependencies=[Depends(get_query_token)]
+)
 
-class Recipe(BaseModel):
-    name: str
-    ingredients: str
-    prep_time: int | float
-    beginner_friendly: bool
+app.include_router(recipe.router)
 
 @app.get("/")
-def read_root():
+def root():
     return {"hello": "world!"}
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: str | None = None):
-    return {"item_id": item_id, "q" : q}
-
-@app.put("/recipes/{recipe_id}")
-def update_recipe(recipe_id: int, recipe: Recipe):
-    return {
-        "recipe_name": recipe.name,
-        "ingredients": recipe.ingredients,
-        "prep_time": recipe.prep_time,
-        "beginner_friendly": recipe.beginner_friendly
-    }
