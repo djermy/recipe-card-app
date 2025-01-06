@@ -7,4 +7,4 @@ load_dotenv()
 class Database:
     def __init__(self, db_url):
         self.db_url = os.getenv("DB_URL")
-        self.conn = create_engine(db_url)
+        self.conn = create_engine(db_url, echo=True)

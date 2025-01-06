@@ -8,3 +8,6 @@ app.include_router(recipe.router)
 @app.get("/")
 async def root():
     return {"hello": "world!"}
+
+if __name__ == "__main__":
+    main()
