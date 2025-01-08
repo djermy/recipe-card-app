@@ -5,8 +5,11 @@ class Recipe_Store:
     def __init__(self, conn):
         self.conn = conn
 
-    def get(self, recipe):
-        pass
+    def get_by_id(self, id: int):
+        with Session(self.conn) as session:
+            query = select(Recipe).where(Recipe.id == id)
+            response = session.exec(query)
+            return response.first()
     
     def get_all(self):
         with Session(self.conn) as session:
