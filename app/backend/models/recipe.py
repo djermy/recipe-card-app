@@ -7,5 +7,5 @@ class Recipe(SQLModel, table=True):
     difficulty: str = Field(index=True, max_length=50) 
     rating: float | None = Field(default=0.0, index=True) 
     likes: int | None = Field(default=0, index=True)
-    ingredients: str = Field(max_legnth=500)
+    ingredients: str = Field(max_length=500)
     description: str = Field(max_length=500)
