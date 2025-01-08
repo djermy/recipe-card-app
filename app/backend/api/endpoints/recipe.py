@@ -13,10 +13,14 @@ router = APIRouter(
 async def root():
     return store.recipe_store.get_all()
 
-@router.get("/{item_id}")
+@router.get("/{recipe_id}")
 async def get_recipe_by_id(id: int):
     return store.recipe_store.get_by_id(id)
 
 @router.post("/create")
 async def create_recipe(recipe: Recipe):
     return store.recipe_store.create(recipe)
+
+@router.delete("/delete/{recipe_id}")
+async def delete_recipe(id: int):
+   return store.recipe_store.delete(id)

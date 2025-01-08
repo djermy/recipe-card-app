@@ -28,3 +28,14 @@ class Recipe_Store:
             session.refresh(recipe)
 
         return [{"message": "recipe created!"}, recipe.dict()]
+
+    def delete(self, id: int):
+        with Session(self.conn) as session:
+            query = select(Recipe).where(Recipe.id == id)
+            response = session.exec(query)
+            recipe = response.one()
+            
+            session.delete(recipe)
+            session.commit()
+            
+            return {"message": "recipe successfully deleted!"}
