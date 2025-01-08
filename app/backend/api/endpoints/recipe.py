@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from sqlmodel import Session, select
 from backend.models.recipe import Recipe
-from backend.database.db import db
+from backend.database.store import store
 
 router = APIRouter(
     prefix="/recipe",
@@ -11,19 +11,8 @@ router = APIRouter(
 
 @router.get("/")
 async def root():
-    with Session(db.conn) as session:
-        query = select(Recipe)
-        response = session.exec(query)
-        recipes = []
-        for recipe in response:
-            recipes.append(recipe)
-
-    return recipes
+    return store.recipe_store.get_all()
 
 @router.post("/create")
 async def create_recipe(recipe: Recipe):
-    with Session(db.conn) as session:
-        session.add(recipe) 
-        session.commit()
-   
-    return {"message": "recipe created!"}
+    return store.recipe_store.create(recipe)
