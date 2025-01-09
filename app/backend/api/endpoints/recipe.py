@@ -17,14 +17,14 @@ async def root():
 async def get_recipe_by_id(id: int):
     return store.recipe_store.get(id)
 
-@router.post("/create")
+@router.post("/")
 async def create_recipe(recipe: Recipe):
     return store.recipe_store.create(recipe)
 
-@router.put("/update/{recipe_id}")
+@router.put("/{recipe_id}")
 async def update_recipe(id: int, updated_recipe: Recipe):
     return store.recipe_store.update(id, updated_recipe)
 
-@router.delete("/delete/{recipe_id}")
+@router.delete("/{recipe_id}")
 async def delete_recipe(id: int):
    return store.recipe_store.delete(id)
