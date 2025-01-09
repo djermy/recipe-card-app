@@ -5,7 +5,15 @@ class Recipe_Store:
     def __init__(self, conn):
         self.conn = conn
 
-    def get_by_id(self, id: int):
+    def create(self, recipe: Recipe):
+        with Session(self.conn) as session:
+            session.add(recipe) 
+            session.commit()
+            session.refresh(recipe)
+
+        return [{"message": "recipe created!"}, recipe.dict()]
+
+    def get(self, id: int):
         with Session(self.conn) as session:
             query = select(Recipe).where(Recipe.id == id)
             response = session.exec(query)
@@ -20,14 +28,23 @@ class Recipe_Store:
                 recipes.append(recipe)
 
         return recipes
-
-    def create(self, recipe: Recipe):
+    
+    def update(self, id: int, updated_recipe: Recipe):
         with Session(self.conn) as session:
-            session.add(recipe) 
+            query = select(Recipe).where(Recipe.id == id)
+            response = session.exec(query)
+            recipe = response.one()
+
+            for key, value in updated_recipe.dict().items():
+                if key == "id":
+                    continue
+                setattr(recipe, key, value)
+
+            session.add(recipe)
             session.commit()
             session.refresh(recipe)
+            return [{"message": "recipe updated!"}, recipe.dict()]
 
-        return [{"message": "recipe created!"}, recipe.dict()]
 
     def delete(self, id: int):
         with Session(self.conn) as session:
@@ -36,6 +53,5 @@ class Recipe_Store:
             recipe = response.one()
             
             session.delete(recipe)
-            session.commit()
-            
+            session.commit()    
             return [{"message": "recipe successfully deleted!"}, recipe.dict()]
