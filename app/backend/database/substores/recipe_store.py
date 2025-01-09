@@ -38,4 +38,4 @@ class Recipe_Store:
             session.delete(recipe)
             session.commit()
             
-            return {"message": "recipe successfully deleted!"}
+            return [{"message": "recipe successfully deleted!"}, recipe.dict()]
