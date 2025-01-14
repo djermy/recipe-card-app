@@ -1,0 +1,16 @@
+body {
+    background-image: url(../assets/images/mushrooms-8058299_1920.jpg);
+}
+
+.page {
+    width: 80%;
+    background-color: burlywood;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    max-width: 1250px;
+}
+
+h1, p {
+    text-align: center;
+}
