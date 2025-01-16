@@ -17,30 +17,25 @@
     <main>
       <h1>Let's create a new recipe!</h1>
       <p>Fill out the recipe card below and press the "add" button when you're done.</p>
-      <form action="/recipe">
+      <form action="/recipe" method="post">
         <fieldset>
-          <legend>name of recipe.</legend>
-          <input required type="text" name="name" placeholder="curry">
+          <label for="name">Recipe Name:</label>
+          <input required type="text" id="name" name="name" placeholder="curry">
+          <label for="cooking-time">Cooking Time (in minutes):</label>
+          <input required type="number" id="cooking-time" name="cook_time_mins" placeholder="150">
+          <label for="ingredients-list">Ingredients List:</label>
+          <textarea required id="ingredients-list" name="ingredients" row="3" cols="30" placeholder="300g rice, 3 medium chicken breasts, etc"></textarea>
+          <label for="cooking-instructions">Cooking Instructions:</label>
+          <textarea required id="cooking-instructions" row="3" cols="30" name="instructions" placeholder="chop onions, chop carrots, cook rice, etc"></textarea>
         </fieldset>
         <fieldset>
-          <legend>cook time in minutes</legend>
-          <input required type="number" name="cook_time_mins" placeholder="150">
+          <legend>Difficulty</legend>
+          <label for="difficulty-beginner"><input required type="radio" id="difficulty-beginner" name="difficulty" value="beginner">Beginner</label>
+          <label for="difficulty-easy"><input required type="radio" id="difficulty-easy" name="difficulty" value="easy">Easy</label>
+          <label for="difficulty-medium"><input required type="radio" id="difficulty-medium" name="difficulty" value="medium">Medium</label>
+          <label for="difficulty-hard"><input required type="radio" id="difficulty-hard" name="difficulty" value="hard">Hard</label>
         </fieldset>
-        <fieldset>
-          <legend>what difficulty level is this recipe?</legend>
-          <label><input required type="radio" name="difficulty" value="beginner">beginner</label>
-          <label><input required type="radio" name="difficulty" value="easy">easy</label>
-          <label><input required type="radio" name="difficulty" value="medium">medium</label>
-          <label><input required type="radio" name="difficulty" value="hard">hard</label>
-        </fieldset>
-        <fieldset>
-          <legend>ingredients list.</legend>
-          <input required type="text" name="ingredients" placeholder="300g rice, 3 medium chicken breasts, etc">
-        </fieldset>
-        <fieldset>
-          <legend>cooking instructions.</legend>
-          <input required type="text" name="description">
-        </fieldset>
+
         <button type="submit">add</button>
       </form>
     </main>
