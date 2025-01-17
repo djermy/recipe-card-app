@@ -7,6 +7,9 @@ class Recipe_Store:
 
     def create(self, recipe: Recipe):
         with Session(self.conn) as session:
+            # manually update the optional total cook time field
+            recipe.total_cook_time = recipe.prep_time_mins + recipe.cook_time_mins
+
             session.add(recipe) 
             session.commit()
             session.refresh(recipe)
@@ -36,9 +39,12 @@ class Recipe_Store:
             recipe = response.one()
 
             for key, value in updated_recipe.dict().items():
-                if key == "id":
+                if key == "id" or key == "total_cook_time":
                     continue
                 setattr(recipe, key, value)
+
+            # manually update total_cook_time field
+            recipe.total_cook_time = recipe.prep_time_mins + recipe.cook_time_mins
 
             session.add(recipe)
             session.commit()

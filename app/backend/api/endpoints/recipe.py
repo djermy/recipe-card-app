@@ -6,8 +6,7 @@ from backend.database.store import store
 router = APIRouter(
     prefix="/recipe",
     tags=["recipe"],
-    responses={404: {"description": "Not found"}},
-)
+    responses={404: {"description": "Not found"}})
 
 @router.get("/")
 async def root():
