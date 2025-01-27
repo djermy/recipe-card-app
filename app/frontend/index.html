@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recipe Card App</title>
-  <link rel="stylesheet" href="styles/main.css">
-</head>
-<body>
-  <div class="page">
-    <header>
-      <!-- Include a reusable header component -->
-      <!-- Example: -->
-      <!-- <include src="components/header.html"></include> -->
-    </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipe Card App</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <!-- Include a reusable header component -->
+        <!-- Example: -->
+        <!-- <include src="components/header.html"></include> -->
+      </header>
 
-    <main>
-      <h1>Welcome to My App</h1>
-      <p>This is the main page.</p>
-    </main>
+      <main>
+        <h1>Welcome to My App</h1>
+        <p>This is the main page.</p>
+        <a href="/create_recipe.html" class="btn btn-primary">Create Recipe</a>
+      </main>
 
-    <footer>
-      <!-- Include a reusable footer component -->
-    </footer>
-
-  </div>
-  <script src="scripts/main.js"></script>
-</body>
+      <footer>
+        <!-- Include a reusable footer component -->
+      </footer>
+    </div>
+    <script src="scripts/recipe.js"></script>
+  </body>
 </html>
